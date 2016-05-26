@@ -1,0 +1,10 @@
+<h1><%= @trip.name %> Info:</h1> 
+<br />
+
+<%= link_to 'Edit', edit_trip_path(@trip) %>
+
+<%= link_to 'Delete', trip_path(@trip), method: :delete %>
+
+<%= link_to 'All Trips', trips_path %>
+
+<%= link_to 'Add ', trips_path %>

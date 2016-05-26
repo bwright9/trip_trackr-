@@ -1,0 +1,10 @@
+<h1><%= @address.name %> Info:</h1> 
+<br />
+
+<%= link_to 'Edit', edit_address_path(@address) %>
+
+<%= link_to 'Delete', address_path(@address), method: :delete %>
+
+<%= link_to 'All Addresses', address_path %>
+
+<%= link_to 'Add', addresses_path %>

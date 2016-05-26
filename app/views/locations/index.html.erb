@@ -1,0 +1,16 @@
+<h1>All Locations</h1>
+<br />
+
+<% if @locations.any? %>
+  <ul>
+    <% @locations.each do |location| %>
+      <li>
+        <%= link_to location.name, location_path(location.id) %> 
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <h3>No locations found. Create one now!</h3>
+<% end %>
+
+<%= link_to 'New Location', new_location_path %>
