@@ -3,9 +3,9 @@
 
 <% if @locations.any? %>
   <ul>
-    <% @locations.each do |location| %>
+    <% @trip.locations.each do |location| %>
       <li>
-        <%= link_to location.name, location_path id: location.id) %> 
+        <%= link_to location.name, location_path(location.id) %> 
       </li>
     <% end %>
   </ul>
@@ -14,4 +14,3 @@
 <% end %>
 
 <%= link_to 'New Location', new_location_path %>
-<%= link_to 'All Trips', trips_path %>

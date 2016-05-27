@@ -5,14 +5,10 @@
 		<li>Date: $<%= @trip.date %></li>
 	</ul>
 
-	<div class='locations'>
 		<h2>Locations</h2>
-		<div class='list-group'>
 			<% @trip.locations.each do |location| %>
 				<%= link_to location.city, trip_location_path(trip_id: @trip.id, id: location.id), class: 'list-group-item' %>
 			<% end %>
-		</div>
-	</div>
 
 
 	<h3>
@@ -20,4 +16,3 @@
 	<%= link_to 'Add a Location', new_trip_location_path(trip_id: @trip.id) %> |
 	<%= link_to 'Delete this trip', trip_path(@trip), method: :delete %>
 	</h3>
-</div>
