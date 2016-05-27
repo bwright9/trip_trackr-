@@ -1,52 +1,57 @@
 class TripsController < ApplicationController
-  
+	before_action :trip, only: [:edit, :show, :update, :destroy] 
+
   def index
-    @trips = Trip.all
-  end
-
-   def edit
-    @trip = Trip.find(params[:id])
-  end
-
-  def new
-    @trip = Trip.new
+  	@trips = Trip.all
   end
 
   def show
-    @trip = Trip.find(params[:id])
+  end
+
+  def new
+  	@trip = Trip.new
   end
 
   def create
-  @trip = Trip.new(trip_params)
-  if @trip.save
-    redirect_to trips_path
-  else
-    render :new
+  	@trip = Trip.new(trip_params)
+  	if @trip.save
+  		flash[:success] = 'Trip Created Successfully'
+  		redirect_to trip_path(@trip)
+  	else
+  		flash[:danger] = @trip.errors.full_messages.join("<br/>").html_safe
+  		render :new
+  	end
   end
-end
 
-  def destroy
-    @trip = Trip.find(params[:id])
-    @trip.destroy
-    redirect_to trips_path
+  def edit
   end
 
   def update
-    @trip = Trip.find(params[:id])
-    if @trip.update(trip_params)
-      redirect_to trip_path(@trip)
-    else
-      render :edit
-    end
+  	if @trip.update(trip_params)
+  		redirect_to trip_path(@trip)
+  	else
+  		render :edit
+  	end
+  end
+
+  def destroy
+  	if @trip.destroy
+  		redirect_to trips_path
+  	else
+  		redirect_to trip_path(@trip)
+  	end
   end
 
   private
 
   def trip_params
-    params.require(:trip).permit(:name, :distance, :date)
+  	params.require(:trip).permit(:name, :distance, :date)
+  end
+
+  def trip
+  	@trip = Trip.find(params[:id])
   end
 end
-
 
 
 

@@ -5,7 +5,11 @@
   <ul>
     <% @addresses.each do |address| %>
       <li>
-        <%= link_to address.name, address_path(address.id) %> 
+        <%= link_to address.name, address_path(id: address.id) %>,
+			<%= link_to address.street, address_path(id: address.id) %>,
+			<%= link_to address.city, address_path(id: address.id) %>,
+			<%= link_to address.state, address_path(id: address.id) %>,
+			<%= link_to address.zip, address_path(id: address.id) %>
       </li>
     <% end %>
   </ul>
@@ -14,3 +18,4 @@
 <% end %>
 
 <%= link_to 'New Address', new_address_path %>
+<%= link_to 'All Locations', locations_path %>

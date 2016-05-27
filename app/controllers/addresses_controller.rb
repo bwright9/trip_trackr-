@@ -1,49 +1,53 @@
 class AddressesController < ApplicationController
-
-def index
+  def index
+    @location = Location.find(params[:address][:location_id])
     @addresses = Address.all
   end
 
-   def edit
+  def show
+    @location = Location.find(params[:location_id])
     @address = Address.find(params[:id])
   end
 
   def new
+    @location = Location.find(params[:location_id])
     @address = Address.new
   end
 
-  def show
+  def create
+    @location = Location.find(params[:address][:location_id])
+    @address = @location.addresses.new(address_params)
+    if @address.save
+      redirect_to address_path(id: @address.id, location_id: @location.id)
+    else
+      render :new
+    end
+  end
+
+  def edit
+    @location = Location.find(params[:location_id])
     @address = Address.find(params[:id])
   end
 
-  def create
-  @address = Address.new(addresse_params)
-  if @address.save
-    redirect_to addresses_path
-  else
-    render :new
-  end
-end
-
-  def destroy
-    @addresse = Address.find(params[:id])
-    @addresse.destroy
-    redirect_to addresses_path
-  end
-
   def update
-    @addresse = Address.find(params[:id])
-    if @addresse.update(addresse_params)
-      redirect_to addresse_path(@addresse)
+    @location = Location.find(params[:address][:location_id])
+    @address = Address.find(params[:id])
+    if @address.update(address_params)
+      redirect_to address_path(id: @address.id, location_id: @location.id)
     else
       render :edit
     end
   end
 
+  def destroy
+    Address.find(params[:id]).destroy
+    redirect_to addresses_path
+  end
+
   private
 
-  def addresse_params
-    params.require(:addresse).permit(:city, :state, :zip, :street)
+  def address_params
+    params.require(:address).permit(:street, :city, :state, :zip, :location_id)
   end
 end
 

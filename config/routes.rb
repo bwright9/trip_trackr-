@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
-  resources :trips
-    resources :locations 
+  root 'trips#index'
+
+  resources :trips do
+    resources :locations
+  end 
+
+  resources :addresses 
+
 end

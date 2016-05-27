@@ -1,10 +1,23 @@
-<h1><%= @trip.name %> Info:</h1> 
-<br />
+	<h1><%= @trip.name %></h1>
+	<ul class='list-inline'>
+		<li>Name: <%= @trip.name %></li>
+		<li>Distance: <%= @trip.distance %> days</li>
+		<li>Date: $<%= @trip.date %></li>
+	</ul>
 
-<%= link_to 'Edit', edit_trip_path(@trip) %>
+	<div class='locations'>
+		<h2>Locations</h2>
+		<div class='list-group'>
+			<% @trip.locations.each do |location| %>
+				<%= link_to location.city, trip_location_path(trip_id: @trip.id, id: location.id), class: 'list-group-item' %>
+			<% end %>
+		</div>
+	</div>
 
-<%= link_to 'Delete', trip_path(@trip), method: :delete %>
 
-<%= link_to 'All Trips', trips_path %>
-
-<%= link_to 'Add ', trips_path %>
+	<h3>
+	<%= link_to 'Edit', edit_trip_path(@trip) %> | 
+	<%= link_to 'Add a Location', new_trip_location_path(trip_id: @trip.id) %> |
+	<%= link_to 'Delete this trip', trip_path(@trip), method: :delete %>
+	</h3>
+</div>
